@@ -1,0 +1,49 @@
+@baseUrl = http://localhost:8080
+
+# Run "Login" and "1. Create task" first.
+
+### Login
+# @name login
+POST {{baseUrl}}/auth/login
+Content-Type: application/json
+
+{ "email": "manuel@test.com", "password": "secret123" }
+
+### 1. Create task
+# @name createTask
+POST {{baseUrl}}/tasks
+Authorization: Bearer {{login.response.body.token}}
+Content-Type: application/json
+
+{
+    "title": "Testing @Valid annotation",
+    "description": "Test request for task 1.1",
+    "status": "IN_PROGRESS",
+    "priority": "HIGH",
+    "dueDate": "2026-12-01T18:00:00"
+}
+
+### 2. Create task with empty title
+POST {{baseUrl}}/tasks
+Authorization: Bearer {{login.response.body.token}}
+Content-Type: application/json
+
+{
+    "title": "",
+    "description": "Test request for task 1.1",
+    "status": "PENDING",
+    "priority": "HIGH",
+    "dueDate": "2026-12-01T18:00:00"
+}
+
+### 3. Update task without status
+PUT {{baseUrl}}/tasks/{{createTask.response.body.id}}
+Authorization: Bearer {{login.response.body.token}}
+Content-Type: application/json
+
+{
+    "title": "Updating a task without status",
+    "description": "Test request for task 1.1",
+    "priority": "HIGH",
+    "dueDate": "2026-12-01T18:00:00"
+}
