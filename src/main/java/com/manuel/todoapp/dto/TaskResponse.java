@@ -1,6 +1,5 @@
 package com.manuel.todoapp.dto;
 
-import com.manuel.todoapp.model.Task;
 import com.manuel.todoapp.model.TaskPriority;
 import com.manuel.todoapp.model.TaskStatus;
 

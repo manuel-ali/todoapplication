@@ -2,10 +2,11 @@ package com.manuel.todoapp.controller;
 
 import com.manuel.todoapp.dto.TaskRequest;
 import com.manuel.todoapp.dto.TaskResponse;
-import com.manuel.todoapp.model.Task;
 import com.manuel.todoapp.model.User;
 import com.manuel.todoapp.service.TaskService;
 import com.manuel.todoapp.service.UserService;
+
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -23,7 +24,7 @@ public class TaskController {
     private final UserService userService;
 
     @PostMapping
-    public TaskResponse createTask (@AuthenticationPrincipal UserDetails userDetails, @RequestBody TaskRequest taskRequest) {
+    public TaskResponse createTask (@AuthenticationPrincipal UserDetails userDetails, @Valid @RequestBody TaskRequest taskRequest) {
         User user = getUserByUserDetails(userDetails);
 
         return taskService.createTask(user, taskRequest);
@@ -44,7 +45,7 @@ public class TaskController {
     }
 
     @PutMapping("/{id}")
-    public TaskResponse updateTaskById (@AuthenticationPrincipal UserDetails userDetails, @RequestBody TaskRequest taskRequest, @PathVariable Long id) {
+    public TaskResponse updateTaskById (@AuthenticationPrincipal UserDetails userDetails, @Valid @RequestBody TaskRequest taskRequest, @PathVariable Long id) {
         User user = getUserByUserDetails(userDetails);
 
         return taskService.updateTask(user, taskRequest, id);
