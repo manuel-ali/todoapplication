@@ -2,6 +2,7 @@ package com.manuel.todoapp.service;
 
 import com.manuel.todoapp.dto.TaskRequest;
 import com.manuel.todoapp.dto.TaskResponse;
+import com.manuel.todoapp.exception.ResourceNotFoundException;
 import com.manuel.todoapp.mapper.TaskMapper;
 import com.manuel.todoapp.model.Task;
 import com.manuel.todoapp.model.User;
@@ -65,12 +66,12 @@ public class TaskService {
     }
 
     public Task findTaskById (Long id) {
-        return taskRepository.findById(id).orElseThrow(() -> new RuntimeException("Task not found"));
+        return taskRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Task not found"));
     }
 
     public void validateOwnership(User user, Task task) {
         if (!task.getUser().getId().equals(user.getId())) {
-            throw new RuntimeException("Task not found" );
+            throw new ResourceNotFoundException("Task not found");
         }
     }
 }
