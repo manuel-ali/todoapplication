@@ -14,7 +14,7 @@ import org.springframework.util.StringUtils;
  */
 public class RequiredEnvironmentValidator implements EnvironmentPostProcessor {
     private static final List<String> REQUIRED_VARIABLES = List.of("JWT_SECRET", "DB_NAME", "DB_USER", "DB_PASSWORD");
-    
+
     @Override
     public void postProcessEnvironment(ConfigurableEnvironment environment, SpringApplication application) {
         List<String> missingVariables = new ArrayList<>();

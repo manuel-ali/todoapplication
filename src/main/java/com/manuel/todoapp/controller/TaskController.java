@@ -24,28 +24,28 @@ public class TaskController {
     private final UserService userService;
 
     @PostMapping
-    public TaskResponse createTask (@AuthenticationPrincipal UserDetails userDetails, @Valid @RequestBody TaskRequest taskRequest) {
+    public TaskResponse createTask(@AuthenticationPrincipal UserDetails userDetails, @Valid @RequestBody TaskRequest taskRequest) {
         User user = getUserByUserDetails(userDetails);
 
         return taskService.createTask(user, taskRequest);
     }
 
     @GetMapping
-    public List<TaskResponse> getUserTasks (@AuthenticationPrincipal UserDetails userDetails) {
+    public List<TaskResponse> getUserTasks(@AuthenticationPrincipal UserDetails userDetails) {
         User user = getUserByUserDetails(userDetails);
 
         return taskService.getTasksByUser(user.getId());
     }
 
     @GetMapping("/{id}")
-    public TaskResponse getTaskById (@AuthenticationPrincipal UserDetails userDetails, @PathVariable Long id) {
+    public TaskResponse getTaskById(@AuthenticationPrincipal UserDetails userDetails, @PathVariable Long id) {
         User user = getUserByUserDetails(userDetails);
 
         return taskService.getTaskById(user, id);
     }
 
     @PutMapping("/{id}")
-    public TaskResponse updateTaskById (@AuthenticationPrincipal UserDetails userDetails, @Valid @RequestBody TaskRequest taskRequest, @PathVariable Long id) {
+    public TaskResponse updateTaskById(@AuthenticationPrincipal UserDetails userDetails, @Valid @RequestBody TaskRequest taskRequest, @PathVariable Long id) {
         User user = getUserByUserDetails(userDetails);
 
         return taskService.updateTask(user, taskRequest, id);
@@ -53,7 +53,7 @@ public class TaskController {
 
     @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void deleteTaskById (@AuthenticationPrincipal UserDetails userDetails, @PathVariable Long id) {
+    public void deleteTaskById(@AuthenticationPrincipal UserDetails userDetails, @PathVariable Long id) {
         User user = getUserByUserDetails(userDetails);
 
         taskService.deleteTask(user, id);

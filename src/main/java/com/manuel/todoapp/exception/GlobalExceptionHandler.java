@@ -10,17 +10,17 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 public class GlobalExceptionHandler {
 
     @ExceptionHandler(BadCredentialsException.class)
-    public ResponseEntity<?> handleBadCredentials () {
+    public ResponseEntity<?> handleBadCredentials() {
         return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Invalid email or password");
     }
 
     @ExceptionHandler(DuplicateResourceException.class)
-    public ResponseEntity<?> handleDuplicateResource (DuplicateResourceException ex) {
+    public ResponseEntity<?> handleDuplicateResource(DuplicateResourceException ex) {
         return ResponseEntity.status(HttpStatus.CONFLICT).body(ex.getMessage());
     }
 
     @ExceptionHandler(ResourceNotFoundException.class)
-    public ResponseEntity<?> handleResourceNotFound (ResourceNotFoundException ex) {
+    public ResponseEntity<?> handleResourceNotFound(ResourceNotFoundException ex) {
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(ex.getMessage());
     }
 }

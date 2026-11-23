@@ -24,13 +24,13 @@ public class TaskService {
         return taskMapper.toDtoFromEntity(taskList);
     }
 
-    public List<TaskResponse> getTasksByUser (Long userId) {
+    public List<TaskResponse> getTasksByUser(Long userId) {
         List<Task> taskList = taskRepository.findByUserId(userId);
 
         return taskMapper.toDtoFromEntity(taskList);
     }
 
-    public TaskResponse getTaskById (User user, Long id) {
+    public TaskResponse getTaskById(User user, Long id) {
         Task task = findTaskById(id);
 
         validateOwnership(user, task);
@@ -38,14 +38,14 @@ public class TaskService {
         return taskMapper.toDtoFromEntity(task);
     }
 
-    public TaskResponse createTask (User user, TaskRequest taskRequest) {
+    public TaskResponse createTask(User user, TaskRequest taskRequest) {
         Task task = taskMapper.toEntityFromDto(user, taskRequest);
         task = taskRepository.save(task);
 
         return taskMapper.toDtoFromEntity(task);
     }
 
-    public TaskResponse updateTask (User user, TaskRequest request, Long id) {
+    public TaskResponse updateTask(User user, TaskRequest request, Long id) {
         Task taskToUpdate = findTaskById(id);
 
         validateOwnership(user, taskToUpdate);
@@ -57,7 +57,7 @@ public class TaskService {
         return taskMapper.toDtoFromEntity(task);
     }
 
-    public void deleteTask (User user, Long id){
+    public void deleteTask(User user, Long id) {
         Task taskToDelete = findTaskById(id);
 
         validateOwnership(user, taskToDelete);
@@ -65,7 +65,7 @@ public class TaskService {
         taskRepository.deleteById(id);
     }
 
-    public Task findTaskById (Long id) {
+    public Task findTaskById(Long id) {
         return taskRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Task not found"));
     }
 

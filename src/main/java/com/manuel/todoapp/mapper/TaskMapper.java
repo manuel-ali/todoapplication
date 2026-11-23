@@ -11,7 +11,7 @@ import java.util.List;
 @Component
 public class TaskMapper {
 
-    public TaskResponse toDtoFromEntity (Task task) {
+    public TaskResponse toDtoFromEntity(Task task) {
         return new TaskResponse(task.getId(),
                 task.getTitle(),
                 task.getDescription(),
@@ -25,7 +25,7 @@ public class TaskMapper {
         return tasks.stream().map(this::toDtoFromEntity).toList();
     }
 
-    public Task updateEntityFromDto (Task taskToUpdate, TaskRequest request) {
+    public Task updateEntityFromDto(Task taskToUpdate, TaskRequest request) {
         taskToUpdate.setTitle(request.title());
         taskToUpdate.setDescription(request.description());
         taskToUpdate.setStatus(request.status());

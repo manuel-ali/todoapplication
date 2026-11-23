@@ -21,7 +21,7 @@ public class AuthService {
     private final PasswordEncoder passwordEncoder;
     private final AuthenticationManager authenticationManager;
 
-    public AuthResponse register (RegisterRequest request) {
+    public AuthResponse register(RegisterRequest request) {
         String username = request.username();
         String email = request.email();
 
@@ -48,7 +48,7 @@ public class AuthService {
         return new AuthResponse(token, createdUser.getDisplayUsername(), createdUser.getRole());
     }
 
-    public AuthResponse login (LoginRequest request) {
+    public AuthResponse login(LoginRequest request) {
         authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(
                         request.email(),

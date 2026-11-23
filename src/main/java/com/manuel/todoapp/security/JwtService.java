@@ -15,7 +15,7 @@ import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
 
 /**
- * Creates and validates the JWTs used to authenticate the API requests 
+ * Creates and validates the JWTs used to authenticate the API requests
  */
 @Service
 public class JwtService {
@@ -32,7 +32,7 @@ public class JwtService {
         this.signingKey = toSigningKey(secretKey);
     }
 
-    public String generateToken(UserDetails userDetails){
+    public String generateToken(UserDetails userDetails) {
         return Jwts.builder()
                 .subject(userDetails.getUsername())
                 .issuedAt(new Date())
@@ -45,15 +45,15 @@ public class JwtService {
         return extractClaim(token, Claims::getSubject);
     }
 
-    public boolean isTokenValid(String token, UserDetails userdetails){
-        return userdetails.getUsername().equals(extractUsername(token)) && !isTokenExpired(token);
+    public boolean isTokenValid(String token, UserDetails userDetails) {
+        return userDetails.getUsername().equals(extractUsername(token)) && !isTokenExpired(token);
     }
 
-    private boolean isTokenExpired(String token){
+    private boolean isTokenExpired(String token) {
         return extractClaim(token, Claims::getExpiration).before(new Date());
     }
 
-    private <T> T extractClaim(String token, Function<Claims, T> claimsResolver){
+    private <T> T extractClaim(String token, Function<Claims, T> claimsResolver) {
         return claimsResolver.apply(Jwts.parser()
                 .verifyWith(signingKey)
                 .build()
