@@ -51,3 +51,14 @@ Content-Type: application/json
 ### 4. Get non-existent task
 GET {{baseUrl}}/tasks/9999999
 Authorization: Bearer {{login.response.body.token}}
+
+### 5. Get Tasks without Authorization
+GET {{baseUrl}}/tasks
+
+### 6. Get Tasks with Bearer abc
+GET {{baseUrl}}/tasks
+Authorization: Bearer abc
+
+### 7. Get Tasks with a real token with a changed letter
+GET {{baseUrl}}/tasks
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJtYW51ZWxAdGVzdC5jb20iLCJpYXQiOjE3OTU1NTAzMTUsImV4cCI6MTc5NTYzNjcxNXa.a5nr7QGoP-SSjuKHEweefwbDQiAFU-uPVAg_mtdyCF5fowBqTqD6FR6HLSg3hPRM6z43falf3YPShWzbHDJi0w
