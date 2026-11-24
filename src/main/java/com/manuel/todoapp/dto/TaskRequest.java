@@ -8,12 +8,12 @@ import jakarta.validation.constraints.NotNull;
 import java.time.LocalDateTime;
 
 public record TaskRequest(
-        @NotBlank
+        @NotBlank(message = "Title is required")
         String title,
         String description,
-        @NotNull
+        @NotNull(message = "Status is required")
         TaskStatus status,
-        @NotNull
+        @NotNull(message = "Priority is required")
         TaskPriority priority,
         LocalDateTime dueDate
 ) {}
